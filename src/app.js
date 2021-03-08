@@ -5,4 +5,11 @@ app.use(express.json());
 const userRouter = require("./routes/users.routes");
 app.use("/users", userRouter);
 
+
+//Default error handler
+app.use((err, req, res, next) => {
+    err.statusCode = err.statusCode || 500;
+    res.status(err.statusCode).send(err.message);
+  });
+  
 module.exports = app;
