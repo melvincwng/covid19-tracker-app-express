@@ -91,6 +91,7 @@ describe("users routes", () => {
         it("should log you out and return a message", async () => {
             const expectedMessage = "You are now logged out!";
             const response = await request(app).post("/users/logout").expect(200);
+            expect(response.status).toBe(200);
             expect(response.text).toBe(expectedMessage)
         });
     });
