@@ -7,7 +7,7 @@ router.post("/", async (req, res, next) => {
     try {
       const user = new User(req.body);
       const newUser= await user.save();
-      res.send(newUser); // default status code is 200, if successful POST request
+      res.status(201).send(newUser); // default status code is 200, if successful POST request
     } catch (err) {
       next(err);
     }
