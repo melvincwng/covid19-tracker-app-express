@@ -6,7 +6,10 @@ app.use(cookieParser());
 require("dotenv").config();
 
 const userRouter = require("./routes/users.routes");
+const articleRouter = require("./routes/articles.routes");
+
 app.use("/users", userRouter);
+app.use("/articles", articleRouter);
 
 
 //Default error handler
