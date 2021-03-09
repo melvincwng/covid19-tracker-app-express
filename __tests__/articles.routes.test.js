@@ -126,7 +126,47 @@ describe("article routes", () => {
             expect(response.status).toBe(500);
         });
     
+    });
 
+    describe("DELETE requests", () => {
+        it("DELETE articles/:id should delete the selected article successfully if logged in and given valid id", async () => {
+                const article = await Article.findOne({ title: "Article 1"});
+                const deletedArticle = {
+                    title: "Article 1",
+                    body: "This is the very first article of the COVID19 articles section.",
+                };
+            
+                const response = await request(app)
+                .delete(`/articles/${article._id}`)
+                .set("Cookie", `token=${token}`)
+                .expect(200)
+    
+                expect(response.status).toBe(200);
+                expect(response.body).toMatchObject(deletedArticle);
+        });
+    
+        it("DELETE articles/:id should not delete the selected article even if valid article id AS NOT LOGGED IN", async () => {
+            const article = await Article.findOne({ title: "Article 1"});
+           
+            const response = await request(app)
+            .delete(`/articles/${article._id}`)
+            .expect(401)
+
+            expect(response.status).toBe(401);
+            expect(response.text).toBe('You are not authorized');
+        });
+    
+        it("DELETE articles/:id should throw an error even if article doesn't exist at all", async () => {
+            const nonExistingArticleId = 'nonExistingId123add123'
+        
+            const response = await request(app)
+            .delete(`/articles/${nonExistingArticleId}`)
+            .set("Cookie", `token=${token}`)
+            .expect(500)
+
+            expect(response.status).toBe(500);
+        });
+        
     });
   
 });

@@ -52,5 +52,15 @@ router.put("/:id", protectRoute, async (req, res, next) => {
     }
 });
 
+router.delete("/:id", protectRoute, async (req, res, next) => {
+    try {
+      await Article.findByIdAndDelete(req.article._id)
+      res.status(200).json(req.article);
+    } catch (err) {
+        next(err)
+    }
+    
+});
+
 module.exports = router;
   
