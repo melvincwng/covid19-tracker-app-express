@@ -7,10 +7,11 @@ require("dotenv").config();
 
 const userRouter = require("./routes/users.routes");
 const articleRouter = require("./routes/articles.routes");
+const aboutRouter = require("./routes/about.routes");
 
 app.use("/users", userRouter);
 app.use("/articles", articleRouter);
-
+app.use("/about", aboutRouter);
 
 //Default error handler
 app.use((err, req, res, next) => {
