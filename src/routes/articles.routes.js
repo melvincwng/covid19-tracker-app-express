@@ -7,7 +7,7 @@ const multer = require('multer');
 //Multer middleware (a node.js middleware fn to handle file uploads)
 const storage = multer.diskStorage({
     destination: function(req, file, callback) {
-        callback(null, "../../images");
+        callback(null, "./images");
     },
     filename: function(req, file, callback) {   
         callback(null, file.originalname);
@@ -54,16 +54,24 @@ router.get("/:id", async (req, res, next) => {
     }
 }); 
 
-router.post("/", upload.single('articleImage'), protectRoute, async (req, res, next) => {
+// If more than 1 middleware, should place the middlewares in an array as shown below
+// The order of the middleware definition is important, so you will need to put protectRoute first:
+router.post("/", [protectRoute, upload.single("articleImage")], async (req, res, next) => {
+    let articleProps = {
+        title: req.body.title,
+        body: req.body.body,
+        authorName: req.body.authorName,
+    };
+  
+    const imageExists = await req.file; //If I insert an image, req.file will be populated (hence truthy). Otherwise, it will not be populated (hence falsy)
+  
+    if (imageExists) {
+        articleProps["articleImage"] = req.file.filename; // <---- Setting articleProps with a key 'articleImage' and value 'req.file.filename' as per Model Schema
+    }
+
     try {
-        const article = new Article({
-            title: req.body.title,
-            body: req.body.body,
-            authorName: req.body.authorName,
-            articleImage: req.file.articleImage
-        });
-        console.log(req.file)
         await Article.init(); // make sure indexes are done building
+        const article = new Article(articleProps);
         const newArticle = await article.save(); 
         res.status(201).send("New article posted!");
     } catch (err) {
