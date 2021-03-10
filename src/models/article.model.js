@@ -12,6 +12,8 @@ const articleSchema = new mongoose.Schema({
     required: true,
     minlength: 1,
   },
+  authorName: { type: String, required: true },
+  postDate: { type: Date, default: Date.now }
 });
 
 const Article = mongoose.model("Article", articleSchema);
