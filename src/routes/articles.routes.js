@@ -63,7 +63,7 @@ router.post("/", [protectRoute, upload.single("articleImage")], async (req, res,
         authorName: req.body.authorName,
     };
   
-    const imageExists = await req.file; //If I insert an image, req.file will be populated (hence truthy). Otherwise, it will not be populated (hence falsy)
+    const imageExists = await req.file; //If I insert an image, req.file will be populated (hence truthy). Otherwise, if you never upload an image, it will not be populated (hence falsy)
   
     if (imageExists) {
         articleProps["articleImage"] = req.file.filename; // <---- Setting articleProps with a key 'articleImage' and value 'req.file.filename' as per Model Schema
