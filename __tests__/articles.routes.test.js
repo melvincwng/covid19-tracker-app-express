@@ -71,12 +71,12 @@ describe("article routes", () => {
     });
 
     describe("POST requests", () => {
-        it("POST /articles should allow you to post an article if logged in; and then return it", async () => {
-            const article = { title: "New Article", body: "This is a new article!", authorName: "Author 1" }; 
+        it("POST /articles should allow you to post an article if logged in; and then return a success message", async () => {
+            const article = { title: "New Article", body: "This is a new article!", authorName: "Author 1" };
             const response = await request(app).post("/articles").send(article).set("Cookie", `token=${token}`).expect(201)
     
             expect(response.status).toBe(201);
-            expect(response.body).toMatchObject(article);
+            expect(response.text).toBe("New article posted!");
         });
 
         it("POST articles/ should not allow you to post an article if not logged in", async () => {

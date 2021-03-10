@@ -2,6 +2,28 @@ const express = require("express");
 const router = express.Router();
 const Article = require('../models/article.model');
 const protectRoute = require('../../middleware/protectRoute');
+const multer = require('multer');
+
+//Multer middleware (a node.js middleware fn to handle file uploads)
+const storage = multer.diskStorage({
+    destination: function(req, file, callback) {
+        callback(null, "../../images");
+    },
+    filename: function(req, file, callback) {   
+        callback(null, file.originalname);
+    }
+});
+
+const fileFilter = (req, file, callback) => {
+    const allowedFileTypes = ['image/jpeg', 'image/jpg', 'image/png'];
+    if(allowedFileTypes.includes(file.mimetype)) {
+        callback(null, true);
+    } else {
+        callback(null, false);
+    }
+}
+
+let upload = multer({ storage, fileFilter }); //storing all the storage fn and fileFilter fn in a variable called 'upload'
 
 //Middleware
 router.param("id", async (req, res, next, id) => {
@@ -32,12 +54,18 @@ router.get("/:id", async (req, res, next) => {
     }
 }); 
 
-router.post("/", protectRoute, async (req, res, next) => {
+router.post("/", upload.single('articleImage'), protectRoute, async (req, res, next) => {
     try {
-        const article = new Article(req.body); 
+        const article = new Article({
+            title: req.body.title,
+            body: req.body.body,
+            authorName: req.body.authorName,
+            articleImage: req.file.articleImage
+        });
+        console.log(req.file)
         await Article.init(); // make sure indexes are done building
         const newArticle = await article.save(); 
-        res.status(201).json(newArticle);
+        res.status(201).send("New article posted!");
     } catch (err) {
         next(err)
     }
