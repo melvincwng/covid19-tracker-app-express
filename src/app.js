@@ -4,8 +4,15 @@ app.use(express.json());
 const cookieParser = require("cookie-parser");
 app.use(cookieParser());
 require("dotenv").config();
+
 const cors = require('cors');
-app.use(cors());
+
+var corsOptions = {
+  origin: process.env.FRONTEND_URL || "http://localhost:3000",
+  credentials: true,
+};
+
+app.use(cors(corsOptions));
 
 const userRouter = require("./routes/users.routes");
 const articleRouter = require("./routes/articles.routes");
