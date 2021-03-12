@@ -8,7 +8,7 @@ require("dotenv").config();
 const cors = require('cors');
 
 var corsOptions = {
-  origin: process.env.FRONTEND_URL || "http://localhost:3000",
+  origin: [process.env.FRONTEND_ONE_URL, process.env.FRONTEND_TWO_URL, process.env.FRONTEND_THREE_URL, process.env.FRONTEND_FOUR_URL, "http://localhost:3000", "http://localhost:3000/login", "http://localhost:3000/articles", "http://localhost:3000/about"],
   credentials: true,
 };
 
