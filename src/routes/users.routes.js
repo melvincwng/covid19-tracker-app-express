@@ -4,7 +4,8 @@ const User = require("../models/user.model");
 const bcrypt = require("bcryptjs");
 const createJWTToken = require("../config/jwt");
 
-router.post("/", async (req, res, next) => {
+// Commented out this route since we no longer allow users to register their own accounts
+/* router.post("/", async (req, res, next) => {
     try {
       const user = new User(req.body);
       const newUser= await user.save();
@@ -12,7 +13,7 @@ router.post("/", async (req, res, next) => {
     } catch (err) {
       next(err);
     }
-  });
+  }); */
 
 router.post("/login", async (req, res, next) => {
   try {
