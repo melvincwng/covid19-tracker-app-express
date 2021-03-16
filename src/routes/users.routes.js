@@ -22,7 +22,7 @@ router.post("/login", async (req, res, next) => {
     const result = await bcrypt.compare(password, user.password);
 
     if (!result) {
-      throw new Error("Login failed");
+      throw new Error("Login failed, wrong password!");
     }
 
     const token = createJWTToken(user.username);
@@ -40,7 +40,7 @@ router.post("/login", async (req, res, next) => {
 
     res.send("You are now logged in!"); 
   } catch (err) {
-    if (err.message === "Login failed") {
+    if (err.message === "Login failed, wrong password!") {
       err.statusCode = 400;
     }
     next(err);
