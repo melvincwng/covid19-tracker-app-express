@@ -35,7 +35,8 @@ router.post("/login", async (req, res, next) => {
       // you are setting the cookie here, and the name of your cookie is `token`
       expires: expiryDate,
       httpOnly: true, // client-side js cannot access cookie info
-      secure: true, // use HTTPS
+      /*secure: true, */ // use HTTPS
+      /*sameSite: "none", */
     });
 
     res.send(["You are now logged in!", user]); //can res.send() or res.json() back stuff such as string, object, or array
