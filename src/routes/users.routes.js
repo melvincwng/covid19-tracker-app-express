@@ -38,7 +38,7 @@ router.post("/login", async (req, res, next) => {
       secure: true, // use HTTPS
     });
 
-    res.send("You are now logged in!"); 
+    res.send(["You are now logged in!", user]); //can res.send() or res.json() back stuff such as string, object, or array
   } catch (err) {
     if (err.message === "Login failed, wrong password!") {
       err.statusCode = 400;
