@@ -49,6 +49,10 @@ router.post("/login", async (req, res, next) => {
 });
 
 router.post("/logout", (req, res) => {
+  // According to Express.js documentations: http://expressjs.com/en/api.html (res.clearCookie() section)
+  // As quoted "Web browsers and other compliant clients will only clear the cookie if the given options is identical to those given to res.cookie(), excluding expires and maxAge."
+  // hence I need to insert an 'options' object in res.clearCookie() that is identical (excluding expires) to the 'options' object in res.cookie()
+  // if not the cookie won't be deleted (that's the bug I experienced!)
   res.clearCookie("token", { httpOnly: true, secure: true, sameSite: "none", }).send("You are now logged out!");
 });
 
