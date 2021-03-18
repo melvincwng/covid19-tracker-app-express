@@ -49,7 +49,7 @@ router.post("/login", async (req, res, next) => {
 });
 
 router.post("/logout", (req, res) => {
-  res.clearCookie("token").send("You are now logged out!");
+  res.clearCookie("token", { httpOnly: true, secure: true, sameSite: "none", }).send("You are now logged out!");
 });
 
 module.exports = router;
