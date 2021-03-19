@@ -11,7 +11,10 @@ describe("about routes", () => {
       const aboutData = [
         {
           title: "About Project",
-          body: "This project was created as a platform for users to know the latest statistics related to COVID19. It is using created HTML, CSS, JS and MERN Stack."
+          body: "This project was created as a platform for users to know the latest statistics related to COVID19. It is using created HTML, CSS, JS and MERN Stack.",
+          body2: "testing",
+          body3: "testing2",
+          body4: "testing3"
         },
       ];
       await About.create(aboutData);
