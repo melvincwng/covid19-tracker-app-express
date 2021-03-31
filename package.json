@@ -9,6 +9,11 @@
     "test": "jest",
     "test:watch": "jest --watch",
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "echo \"[Husky] pre-commit\"",
+    }
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
