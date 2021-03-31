@@ -6,8 +6,8 @@ router.get("/", async (req, res, next) => {
     try {
       const about = await About.find({}) // find all documents stored in the About Model
       res.status(200).json(about)
-    } catch (err) {
-        next(err)
+    } catch (error) {
+        next(error)
     }
 }); 
 
