@@ -68,6 +68,12 @@ describe("article routes", () => {
             expect(response.status).toBe(200);
             expect(response.body).toMatchObject(expectedArticle);
       });
+
+      it("GET /articles/:id should not return an article as invalid id or no such article", async () => {
+        const nonExistingArticleId = "605ad60b78d1010015f1337z";
+        const response = await request(app).get(`/articles/${nonExistingArticleId}`).expect(500);
+        expect(response.status).toBe(500);
+  });
     });
 
     describe("POST requests", () => {
@@ -77,6 +83,13 @@ describe("article routes", () => {
           
             expect(response.status).toBe(201);
             expect(response.text).toBe("New article posted!");
+        });
+
+        it("POST /articles should not allow you to post an article even if logged in; due to incomplete fields", async () => {
+          const article = { title: "", body: "", authorName: "" };
+          const response = await request(app).post("/articles").send(article).set("Cookie", `token=${token}`).expect(500)
+        
+          expect(response.status).toBe(500);
         });
 
         it("POST articles/ should not allow you to post an article if not logged in", async () => {
