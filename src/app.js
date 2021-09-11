@@ -26,6 +26,7 @@ app.use(cors(corsOptions));
 // 12/09/21: To serve static files like images in the 'images' folder of the express app
 // https://expressjs.com/en/starter/static-files.html
 // Hence in localhost for instance, the images will be hosted at e.g. localhost:3001/images/test.jpg
+// Also take note, your images can be hosted either in a) SERVER (this implementation) or b) DATABASE (not done here)
 app.use("/images", express.static("images"));
 
 const userRouter = require("./routes/users.routes");
