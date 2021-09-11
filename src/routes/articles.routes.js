@@ -73,7 +73,7 @@ router.post("/", [protectRoute, upload.single("articleImage")], async (req, res,
         await Article.init(); // make sure indexes are done building
         const article = new Article(articleProps);
         const newArticle = await article.save(); 
-        res.status(201).send("New article posted!");
+        res.status(201).send(req.file);
     } catch (err) {
         next(err)
     }
