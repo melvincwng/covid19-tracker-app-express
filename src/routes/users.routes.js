@@ -44,10 +44,10 @@ router.post("/login", async (req, res, next) => {
       expires: expiryDate,
       httpOnly: true, // client-side js cannot access cookie info
       secure: true, // use HTTPS
-      sameSite: "lax", // need to set sameSite attribute to 'none' so that when we make a cross-origin request to the server, it will allow the cookie inside the response object to be sent back
+      sameSite: "none", // need to set sameSite attribute to 'none' so that when we make a cross-origin request to the server, it will allow the cookie inside the response object to be sent back
     }); // Visit https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Set-Cookie/SameSite for more information on sameSite = 'none';
 
-    res.send(["You are now logged in TEST!", userObject]); // can res.send() or res.json() back stuff such as string, object, or array
+    res.send(["You are now logged in!", userObject]); // can res.send() or res.json() back stuff such as string, object, or array
   } catch (err) {
     if (err.message === "Login failed, wrong password!") {
       err.statusCode = 400;
