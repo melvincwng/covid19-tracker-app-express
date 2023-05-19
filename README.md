@@ -7,3 +7,4 @@ It is used as one of the APIs for https://github.com/melvincwng/covid19-tracker-
 References:
 
 1. https://www.quotaguard.com/docs/language-platform/mongo-db/connect-mongodb-static-ip/ (QuotaGuard Heroku Plugin that allows you to route inbound/outbound traffic through a static IP address that is whitelisted on your MongoDB Atlas cluster)
+2. https://www.quotaguard.com/dashboard/ (QuotaGuard Dashboard to view your Request usage & Bandwidth usage)
