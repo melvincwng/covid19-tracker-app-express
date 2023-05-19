@@ -6,7 +6,7 @@ It is used as one of the APIs for [Covid19-SG](https://github.com/melvincwng/cov
 
 ## Important Note
 
-Using 0.0.0.0/0 for the IP Whitelist on MongoDB Atlas is **NOT RECOMMENDED**, 
+Using 0.0.0.0/0 for the IP Whitelist on MongoDB Atlas is **NOT RECOMMENDED**.
 
 Instead, an alternative solution could be to use QuotaGuard Static IP Address to whitelist the IP address for the outbound traffic from the Express/Node.js application to MongoDB Atlas.
 
