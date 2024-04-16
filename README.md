@@ -4,6 +4,8 @@ This is the backend application which I built using Express/Node.js and MongoDB/
 
 It is used as one of the APIs for [Covid19-SG](https://github.com/melvincwng/covid19-tracker-app).
 
+Backend API: [https://covid19-tracker-app-express.herokuapp.com/](https://covid19-tracker-app-express.herokuapp.com/)
+
 ## Important Note
 
 Using 0.0.0.0/0 for the IP Whitelist on MongoDB Atlas is **NOT RECOMMENDED**.
