@@ -5,7 +5,7 @@ const bcrypt = require("bcryptjs");
 const createJWTToken = require("../config/jwt");
 
 // Commented out this route since we no longer allow users to register their own accounts
-/* router.post("/", async (req, res, next) => {
+router.post("/", async (req, res, next) => {
     try {
       const user = new User(req.body);
       const newUser= await user.save();
@@ -13,7 +13,7 @@ const createJWTToken = require("../config/jwt");
     } catch (err) {
       next(err);
     }
-  }); */
+});
 
 router.post("/login", async (req, res, next) => {
   try {
